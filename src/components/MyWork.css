@@ -1,0 +1,243 @@
+.my-work-section {
+  padding: 120px 20px;
+  background-color: #ffffff; /* Pure white background */
+  color: #000000;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.my-work-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.my-work-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.my-work-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  color: #000000;
+}
+
+/* Removed the colorful gradient for a pure black and white theme */
+.my-work-title span {
+  color: #6b7280; /* Subtle dark gray to keep contrast */
+}
+
+.my-work-subtitle {
+  font-size: 1.15rem;
+  color: #4b5563;
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.my-work-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.my-work-tab {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #4b5563;
+  padding: 12px 28px;
+  border-radius: 100px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.my-work-tab:hover {
+  background: #f9fafb;
+  color: #000000;
+  border-color: #d1d5db;
+}
+
+.my-work-tab.active {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Minimal Typographic Cards */
+.my-work-projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.my-work-card-minimal {
+  display: block;
+  text-decoration: none;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 35px 30px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle grayscale background on hover instead of blue glow */
+.my-work-card-minimal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f3f4f6; /* Very light gray */
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.my-work-card-minimal:hover {
+  transform: translateY(-8px);
+  border-color: #000000; /* Black border on hover */
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15); /* Shade of black shadow */
+}
+
+.my-work-card-minimal:hover::before {
+  opacity: 1;
+}
+
+.minimal-card-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  min-height: 160px;
+}
+
+.minimal-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.minimal-platform-badge {
+  background: #f3f4f6;
+  color: #4b5563;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+/* On hover, platform badge becomes solid black */
+.my-work-card-minimal:hover .minimal-platform-badge {
+  background: #000000;
+  color: #ffffff;
+}
+
+.arrow-icon-wrapper {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.arrow-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+/* On hover, arrow circle turns black */
+.my-work-card-minimal:hover .arrow-icon-wrapper {
+  background: #000000;
+  border-color: #000000;
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.my-work-card-minimal:hover .arrow-icon {
+  transform: translate(2px, -2px);
+}
+
+.minimal-card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.minimal-project-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+/* Keep title solid black on hover */
+.my-work-card-minimal:hover .minimal-project-title {
+  color: #000000;
+}
+
+.minimal-visit-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6b7280;
+  transition: color 0.3s ease;
+}
+
+/* Visit text turns black on hover */
+.my-work-card-minimal:hover .minimal-visit-text {
+  color: #000000;
+}
+
+@media (max-width: 768px) {
+  .my-work-section {
+    padding: 80px 15px;
+  }
+
+  .my-work-title {
+    font-size: 2.5rem;
+  }
+  
+  .my-work-tabs {
+    gap: 10px;
+  }
+  
+  .my-work-tab {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .my-work-projects {
+    grid-template-columns: 1fr;
+  }
+}
