@@ -19,6 +19,24 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Custom click handler: close menu first, then scroll after a tiny delay
+  // so the exit animation doesn't block the browser's native anchor scroll
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    setIsOpen(false);
+
+    setTimeout(() => {
+      if (href === '#' || href === '') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }, 100);
+  };
+
   return (
     <motion.nav 
       initial={{ y: -100 }}
@@ -30,7 +48,11 @@ const Navbar = () => {
         <div className={`flex justify-between items-center transition-all duration-500 ${isScrolled ? 'bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/50 rounded-full px-6 py-2' : 'px-2'}`}>
           
           {/* Logo */}
-          <a href="#" className="text-2xl font-black tracking-tighter text-gray-900 flex items-center gap-1 group">
+          <a
+            href="#"
+            onClick={(e) => handleNavClick(e, '#')}
+            className="text-2xl font-black tracking-tighter text-gray-900 flex items-center gap-1 group"
+          >
             RONAK
             <span className="w-2 h-2 rounded-full bg-gray-900 group-hover:scale-150 transition-transform duration-300"></span>
           </a>
@@ -40,7 +62,8 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
-                href={link.href} 
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="relative px-4 py-2 text-sm font-semibold text-gray-600 hover:text-gray-900 transition-colors group"
               >
                 {link.name}
@@ -51,7 +74,8 @@ const Navbar = () => {
 
           <div className="hidden lg:flex items-center">
             <a 
-              href="#contact" 
+              href="#contact"
+              onClick={(e) => handleNavClick(e, '#contact')}
               className="relative overflow-hidden group bg-gray-900 text-white px-7 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-800 transition-all shadow-[0_0_20px_rgba(0,0,0,0.1)] hover:shadow-[0_0_25px_rgba(0,0,0,0.2)]"
             >
               <span className="relative z-10">Let's Talk</span>
@@ -89,7 +113,7 @@ const Navbar = () => {
                   transition={{ delay: i * 0.1 }}
                   key={link.name} 
                   href={link.href} 
-                  onClick={() => setIsOpen(false)} 
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="text-lg font-semibold text-gray-800 hover:text-black hover:pl-2 transition-all border-b border-gray-50 pb-2"
                 >
                   {link.name}
@@ -100,7 +124,7 @@ const Navbar = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: navLinks.length * 0.1 }}
                 href="#contact"
-                onClick={() => setIsOpen(false)} 
+                onClick={(e) => handleNavClick(e, '#contact')}
                 className="mt-4 bg-gray-900 text-white text-center py-3 rounded-xl font-semibold shadow-lg"
               >
                 Let's Talk
