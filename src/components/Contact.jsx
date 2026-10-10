@@ -1,85 +1,138 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import './Contact.css';
-
-const contactItems = [
-  {
-    id: 'phone',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-      </svg>
-    ),
-    label: 'Phone',
-    value: '+91 89763 07406',
-    href: 'tel:+918976307406',
-  },
-  {
-    id: 'whatsapp',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-      </svg>
-    ),
-    label: 'WhatsApp',
-    value: '+91 89763 07406',
-    href: 'https://wa.me/918976307406',
-  },
-  {
-    id: 'email',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-      </svg>
-    ),
-    label: 'Email',
-    value: 'ronakjethwa148@gmail.com',
-    href: 'mailto:ronakjethwa148@gmail.com',
-  },
-];
+import { FiPhone, FiMail, FiGithub, FiLinkedin, FiSend } from 'react-icons/fi';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.form?.checkValidity();
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus({ type: 'error', message: 'Please fill out all fields.' });
+      return;
+    }
+    // Simulate form submission
+    setStatus({ type: 'success', message: 'Thank you for reaching out! I will get back to you soon.' });
+    setFormData({ name: '', email: '', message: '' });
+  };
+
   return (
-    <section className="contact-section" id="contact">
-      <div className="contact-container">
+    <section id="contact" className="py-10 bg-primary relative border-t border-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="contact-header"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-8 text-center"
         >
-          <h2 className="contact-title">Let's <span>Connect</span></h2>
-          <p className="contact-subtitle">
-            Have a project in mind or want to work together? Reach out through any of the channels below.
-          </p>
+          <span className="inline-block py-1 px-3 rounded-full bg-secondary text-accent text-xs font-bold tracking-widest mb-4">
+              CONTACT
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white">Let's Work <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-purple-500">Together</span></h2>
         </motion.div>
 
-        <div className="contact-cards">
-          {contactItems.map((item, index) => (
-            <motion.a
-              key={item.id}
-              href={item.href}
-              target={item.id === 'whatsapp' ? '_blank' : undefined}
-              rel={item.id === 'whatsapp' ? 'noopener noreferrer' : undefined}
-              className="contact-card"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="contact-card-icon">{item.icon}</div>
-              <div className="contact-card-text">
-                <span className="contact-card-label">{item.label}</span>
-                <span className="contact-card-value">{item.value}</span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl font-bold text-white mb-6">Get In Touch</h3>
+            <p className="text-gray-400 mb-8 leading-relaxed">
+              Whether you have a question about my work, are looking for a developer, or just want to connect, feel free to reach out. I'm currently open to new opportunities.
+            </p>
+
+            <div className="space-y-6">
+              <a href="mailto:ronakjethwa148@gmail.com" className="flex items-center gap-4 text-gray-300 hover:text-white group transition-colors">
+                <div className="w-12 h-12 rounded-full bg-secondary border border-gray-800 flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all">
+                  <FiMail className="text-xl" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 font-medium">Email</p>
+                  <p className="font-semibold">ronakjethwa148@gmail.com</p>
+                </div>
+              </a>
+
+              <a href="tel:+918976307406" className="flex items-center gap-4 text-gray-300 hover:text-white group transition-colors">
+                <div className="w-12 h-12 rounded-full bg-secondary border border-gray-800 flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all">
+                  <FiPhone className="text-xl" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 font-medium">Phone / WhatsApp</p>
+                  <p className="font-semibold">+91 89763 07406</p>
+                </div>
+              </a>
+
+              <div className="flex gap-4 pt-6 mt-6 border-t border-gray-800">
+                <a href="#" className="w-10 h-10 rounded-full bg-secondary border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:border-gray-500 transition-all">
+                  <FiGithub />
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-secondary border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:border-gray-500 transition-all">
+                  <FiLinkedin />
+                </a>
               </div>
-              <div className="contact-card-arrow">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                </svg>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="bg-secondary/30 p-8 rounded-3xl border border-gray-800"
+          >
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">Your Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  className="w-full bg-primary border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors"
+                  placeholder="John Doe"
+                />
               </div>
-            </motion.a>
-          ))}
+              
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  className="w-full bg-primary border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors"
+                  placeholder="john@example.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                <textarea
+                  id="message"
+                  value={formData.message}
+                  onChange={(e) => setFormData({...formData, message: e.target.value})}
+                  rows="4"
+                  className="w-full bg-primary border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors resize-none"
+                  placeholder="How can we work together?"
+                ></textarea>
+              </div>
+
+              {status && (
+                <div className={`p-3 rounded-lg text-sm ${status.type === 'error' ? 'bg-red-500/10 text-red-500' : 'bg-green-500/10 text-green-500'}`}>
+                  {status.message}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                className="w-full bg-accent hover:bg-indigo-600 text-white font-semibold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors"
+              >
+                Send Message <FiSend />
+              </button>
+            </form>
+          </motion.div>
         </div>
       </div>
     </section>

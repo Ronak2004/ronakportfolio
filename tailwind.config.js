@@ -10,9 +10,9 @@ export default {
         sans: ['Inter', 'sans-serif'],
       },
       colors: {
-        primary: "#111827",
-        secondary: "#374151",
-        accent: "#3b82f6",
+        primary: "#0B0F19",
+        secondary: "#1E293B",
+        accent: "#6366F1",
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
